@@ -1,0 +1,43 @@
+{
+  "name": "Cek Nilai KHS",
+  "version": "0.1.0",
+  "description": "Chrome Extensions to check your KHS Completely",
+  "permissions": ["storage", "declarativeContent", "activeTab", "scripting"],
+  "host_permissions": ["https://siakad.uns.ac.id/nilai/index*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://siakad.uns.ac.id/nilai/index*"],
+      "js": ["contentScript.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "assets/bookmark.png",
+        "assets/play.png",
+        "assets/delete.png",
+        "assets/save.png",
+		"inject.js"
+      ],
+      "matches": ["https://siakad.uns.ac.id/*"]
+    }
+  ],
+  "icons": {
+    "16": "assets/ext-icon.png",
+    "48": "assets/ext-icon.png",
+    "128": "assets/ext-icon.png"
+  },
+  "action": {
+    "default_icon": {
+      "16": "assets/ext-icon.png",
+      "24": "assets/ext-icon.png",
+      "32": "assets/ext-icon.png"
+    },
+    "default_title": "Cek Nilai KHS",
+    "default_popup": "popup.html"
+  },
+  "manifest_version": 3
+}
