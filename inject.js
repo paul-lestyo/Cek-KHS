@@ -1,4 +1,4 @@
-let URL_KHS = "https://siakad.uns.ac.id/services/v1/nilai/khs?"
+let URL_KHS = "https://siakad.uns.ac.id/nilai/nilai-khs?"
 let DataKHS = [];
 const addNewModal = (KHSSemester = []) => {
 	const modal = document.createElement('div');
@@ -21,25 +21,25 @@ const addNewModal = (KHSSemester = []) => {
 					${KHSSemester[i].kelas}
 				</td>
 				<td class="text-center">
-					${KHSSemester[i].nilai_tugas}
+					${KHSSemester[i].nilai_tugas ?? "-"}
 				</td>
 				<td class="text-center">
-					${KHSSemester[i].nilai_kuis}
+					${KHSSemester[i].nilai_kuis ?? "-"}
 				</td>
 				<td class="text-center">
-					${KHSSemester[i].nilai_mid}
+					${KHSSemester[i].nilai_mid ?? "-"}
 				</td>
 				<td class="text-center">
-					${KHSSemester[i].nilai_praktik}
+					${KHSSemester[i].nilai_praktik ?? "-"}
 				</td>
 				<td class="text-center">
-					${KHSSemester[i].nilai_uas}
+					${KHSSemester[i].nilai_uas ?? "-"}
 				</td>
 				<td class="text-center">
-					${KHSSemester[i].nilai_akhir}
+					${KHSSemester[i].nilai_akhir ?? "-"}
 				</td>
 				<td class="text-center">
-					${KHSSemester[i].nilai_huruf}
+					${KHSSemester[i].nilai_huruf ?? "-"}
 				</td>
 			</tr>
 		`;
@@ -114,9 +114,9 @@ const addNewModal = (KHSSemester = []) => {
 
 const getDataKHS = async (tahun, semester) => {
 	let headers = new Headers()
-	headers.append('Authorization', 'Bearer ' + JWT_TOKEN)
+	// headers.append('Authorization', 'Bearer ' + JWT_TOKEN)
 	const response = await fetch(`${URL_KHS}tahun=${tahun}&semester=${semester}`, {
-		method: 'POST',
+		method: 'GET',
 		headers
 	})
 
@@ -148,7 +148,7 @@ newDiv.innerHTML += `
 				<div class="col-sm-6">
 					<div class="form-group field-bimbinganakademiksearch-tahun">
 						<label class="control-label" >Tahun</label>
-						<input type="number" class="form-control" name="tahun" placeholder="Masukkan Tahun yang ingin dicari..." min="2017" value="2021" >
+						<input type="number" class="form-control" name="tahun" placeholder="Masukkan Tahun yang ingin dicari..." min="2017" value="2022" >
 
 						<div class="help-block"></div>
 					</div>
@@ -182,6 +182,6 @@ const searchKHS = async () => {
 
 
 	const KHSSemester = await getDataKHS(dataForm.tahun, dataForm.semester);
-	addNewModal(KHSSemester.data);
+	addNewModal(KHSSemester);
 	return false;
 };
